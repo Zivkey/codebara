@@ -1,8 +1,8 @@
-import Image from "next/image";
 import grain from "../../public/grain.png";
-// The sea photo with its flip, sepia and cobalt shade already baked in.
-import seaPoster from "../../public/sea-poster-graded.jpg";
 import { EmailLink } from "./email-link";
+import { PosterPhoto } from "./poster-photo";
+import { Sparkle } from "./sparkle";
+import { ThemeSwitcher } from "./theme-switcher";
 
 const EMAIL = "marko@wonder.so";
 
@@ -54,17 +54,6 @@ function CopiedSwap({ label, className = "" }: { label: string; className?: stri
   );
 }
 
-function Sparkle({ className }: { className?: string }) {
-  return (
-    <svg viewBox="8 8 48 48" fill="none" aria-hidden="true" className={className}>
-      <path
-        fill="currentColor"
-        d="M32.6 9.5c.9 0 1.2 1.6 1.4 4 .7 8.6 2.4 13.6 6.2 15.6 3.2 1.7 8.4 2.2 14 2.6 1.5.1 1.5 1.5 0 1.7-5.6.6-10.8 1-14 2.6-3.8 2-5.5 7-6.2 15.8-.2 2.4-.6 3.9-1.4 3.9s-1.2-1.5-1.4-3.9c-.7-8.8-2.4-13.8-6.2-15.8-3.2-1.6-8.2-2-13.4-2.6-1.5-.2-1.5-1.6 0-1.7 5.2-.4 10.2-.9 13.4-2.6 3.8-2 5.5-7 6.2-15.6.2-2.4.5-4 1.4-4z"
-      />
-    </svg>
-  );
-}
-
 function WonderMark({
   className,
   // The default box leaves a little air around the mark; pass a tighter one
@@ -88,7 +77,10 @@ function WonderMark({
 
 export default function Home() {
   return (
-    <div className="relative flex flex-1 flex-col items-center overflow-clip bg-rose px-4 pb-24 font-sans text-azure antialiased">
+    <div className="relative flex flex-1 flex-col items-center overflow-clip bg-page px-4 pb-24 font-sans text-ink antialiased transition-colors duration-300">
+      {/* Floats in the corner, clear of the centered content, while the page scrolls. */}
+      <ThemeSwitcher className="fixed right-5 bottom-[calc(1.25rem+env(safe-area-inset-bottom))] z-50 sm:right-8 sm:bottom-8" />
+
       <header className="absolute inset-x-6 top-8 flex items-center justify-between sm:inset-x-10">
         <span className="text-[17px] font-semibold tracking-[-0.01em]">Codebara</span>
         <EmailLink
@@ -97,7 +89,7 @@ export default function Home() {
         >
           <CopiedSwap
             label="Say hi"
-            className="underline decoration-azure underline-offset-[5px] group-hover:underline-offset-[9px] group-focus-visible:underline-offset-[9px]"
+            className="underline decoration-ink underline-offset-[5px] group-hover:underline-offset-[9px] group-focus-visible:underline-offset-[9px]"
           />
         </EmailLink>
       </header>
@@ -114,18 +106,15 @@ export default function Home() {
         </p>
 
         <div className="mt-[34px] flex flex-col gap-3.5 text-[19px] leading-[1.55] font-medium">
-          <p>I design and build software, usually with a few AI agents working beside me.</p>
+          <p>I&apos;m a software engineer.</p>
           <p>
-            Day to day that happens at Wonder, the canvas where designers, engineers and their
-            agents work together.
+            These days I work on Wonder, a canvas for designing and building software with AI
+            agents.
           </p>
-          <p>
-            Always happy to talk about design, code or agents. The links below are the fastest
-            way to reach me.
-          </p>
+          <p>The links are below. Say hi.</p>
         </div>
 
-        <ul className="mt-10 flex w-full flex-col border-b border-cobalt-line">
+        <ul className="mt-10 flex w-full flex-col border-b border-line">
           {links.map((link) => {
             const external = link.href.startsWith("http");
             const isEmail = link.href.startsWith("mailto:");
@@ -135,11 +124,11 @@ export default function Home() {
               <>
                 <span
                   aria-hidden="true"
-                  className="absolute inset-x-0 -top-px h-0.5 bg-azure opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  className="absolute inset-x-0 -top-px h-0.5 bg-ink opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
                 />
                 <span
                   aria-hidden="true"
-                  className="absolute inset-x-0 -bottom-px h-0.5 bg-azure opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  className="absolute inset-x-0 -bottom-px h-0.5 bg-ink opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
                 />
                 <span className="relative flex items-center text-[22px] font-semibold tracking-[-0.02em]">
                   <Sparkle className="absolute left-0 size-[22px] scale-50 -rotate-90 opacity-0 transition duration-300 ease-out-expo group-hover:scale-100 group-hover:rotate-0 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:rotate-0 group-focus-visible:opacity-100" />
@@ -158,7 +147,7 @@ export default function Home() {
               </>
             );
             return (
-              <li key={link.name} className="border-t border-cobalt-line">
+              <li key={link.name} className="border-t border-line">
                 {isEmail ? (
                   <EmailLink email={EMAIL} className={rowClass}>
                     {row}
@@ -180,18 +169,10 @@ export default function Home() {
 
       <section
         aria-label="Currently at Wonder"
-        className="poster @container relative mt-24 aspect-[880/1100] w-full max-w-[880px] overflow-clip bg-cobalt-deep text-rose sm:mt-[180px]"
+        className="poster @container relative mt-24 aspect-[880/1100] w-full max-w-[880px] overflow-clip bg-poster text-page transition-colors duration-500 sm:mt-[180px]"
       >
         <div className="poster-photo absolute inset-x-0 -top-[15%] h-[130%]">
-          <Image
-            src={seaPoster}
-            alt="The sea seen from a rocky coast, with pink bougainvillea in the foreground"
-            fill
-            sizes="(min-width: 912px) 880px, 100vw"
-            placeholder="blur"
-            loading="eager"
-            className="object-cover"
-          />
+          <PosterPhoto />
         </div>
         <div
           aria-hidden="true"
@@ -213,10 +194,6 @@ export default function Home() {
           <p className="poster-statement mb-[20cqw] w-[34.1cqw] text-[3.86cqw] leading-[1.08] font-semibold tracking-[-0.025em]">
             Design and code with your agents on one canvas.
           </p>
-
-          <span className="poster-note absolute top-[51.36cqw] right-[6.36cqw] -rotate-[5deg] font-handwriting text-[5cqw] leading-none whitespace-nowrap">
-            my day job
-          </span>
         </div>
       </section>
 

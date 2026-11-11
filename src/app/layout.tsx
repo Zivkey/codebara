@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Caveat, Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { themeInitScript } from "./theme-config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -9,11 +10,6 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const caveat = Caveat({
-  variable: "--font-caveat",
   subsets: ["latin"],
 });
 
@@ -34,10 +30,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // The script below may set data-theme before React hydrates.
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
