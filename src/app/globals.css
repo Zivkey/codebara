@@ -40,12 +40,14 @@ body {
       animation: poster-reveal linear both;
       animation-timeline: --poster;
       animation-range: entry 0% entry 70%;
+      will-change: transform;
     }
 
     .poster-photo {
       animation: poster-parallax linear both;
       animation-timeline: --poster;
       animation-range: cover 0% cover 100%;
+      will-change: transform;
     }
 
     .poster-title {
@@ -70,11 +72,9 @@ body {
 
 @keyframes poster-reveal {
   from {
-    clip-path: inset(10% 9% 0 9% round 28px);
-    transform: translateY(96px);
+    transform: translateY(96px) scale(0.86);
   }
   to {
-    clip-path: inset(0 0 0 0 round 0);
     transform: none;
   }
 }

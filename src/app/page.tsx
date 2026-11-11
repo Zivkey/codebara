@@ -1,5 +1,7 @@
 import Image from "next/image";
-import seaPoster from "../../public/sea-poster.png";
+import grain from "../../public/grain.png";
+// The sea photo with its flip, sepia and cobalt shade already baked in.
+import seaPoster from "../../public/sea-poster-graded.jpg";
 import { EmailLink } from "./email-link";
 
 const EMAIL = "marko@wonder.so";
@@ -154,17 +156,15 @@ export default function Home() {
             fill
             sizes="(min-width: 912px) 880px, 100vw"
             placeholder="blur"
-            className="-scale-x-100 object-cover sepia-[0.12]"
+            loading="eager"
+            className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-cobalt-deep opacity-[0.16]" />
-        <svg aria-hidden="true" className="absolute inset-0 size-full mix-blend-overlay">
-          <filter id="poster-grain-sea">
-            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch" />
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#poster-grain-sea)" />
-        </svg>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-size-[128px_128px] mix-blend-overlay"
+          style={{ backgroundImage: `url(${grain.src})` }}
+        />
 
         <div className="relative flex size-full flex-col p-[4.55cqw]">
           <div className="flex w-full items-center justify-between">
