@@ -28,6 +28,32 @@ function ArrowUpRight({ className }: { className?: string }) {
   );
 }
 
+/**
+ * A label that slides out and lets "Email copied" slide in while the
+ * surrounding EmailLink carries `data-copied`. Both sit in one grid cell so
+ * the swap never shifts the layout, and the incoming label waits a beat so
+ * the two never overlap.
+ */
+function CopiedSwap({ label, className = "" }: { label: string; className?: string }) {
+  const base =
+    "col-start-1 row-start-1 whitespace-nowrap transition-[opacity,translate,text-underline-offset] duration-300 ease-out-expo motion-reduce:transition-none";
+  return (
+    <span className="inline-grid justify-items-end">
+      <span
+        className={`${base} [transition-delay:120ms,120ms,0ms] group-data-copied:-translate-y-2 group-data-copied:opacity-0 group-data-copied:[transition-delay:0ms] ${className}`}
+      >
+        {label}
+      </span>
+      <span
+        aria-hidden="true"
+        className={`${base} translate-y-2 opacity-0 group-data-copied:translate-y-0 group-data-copied:opacity-100 group-data-copied:[transition-delay:120ms,120ms,0ms] ${className}`}
+      >
+        Email copied
+      </span>
+    </span>
+  );
+}
+
 function Sparkle({ className }: { className?: string }) {
   return (
     <svg viewBox="8 8 48 48" fill="none" aria-hidden="true" className={className}>
@@ -59,10 +85,12 @@ export default function Home() {
         <span className="text-[17px] font-semibold tracking-[-0.01em]">Codebara</span>
         <EmailLink
           email={EMAIL}
-          className="group text-base font-semibold underline decoration-azure underline-offset-[5px] transition-[text-underline-offset] duration-300 ease-out-expo hover:underline-offset-[9px] focus-visible:underline-offset-[9px]"
+          className="group text-base font-semibold"
         >
-          <span className="group-data-copied:hidden">Say hi</span>
-          <span className="hidden group-data-copied:inline">Email copied</span>
+          <CopiedSwap
+            label="Say hi"
+            className="underline decoration-azure underline-offset-[5px] group-hover:underline-offset-[9px] group-focus-visible:underline-offset-[9px]"
+          />
         </EmailLink>
       </header>
 
@@ -113,10 +141,7 @@ export default function Home() {
                 </span>
                 <span className="flex items-center gap-2.5 text-right text-base font-medium">
                   {isEmail ? (
-                    <>
-                      <span className="group-data-copied:hidden">{link.note}</span>
-                      <span className="hidden group-data-copied:inline">Email copied</span>
-                    </>
+                    <CopiedSwap label={link.note} />
                   ) : (
                     link.note
                   )}
