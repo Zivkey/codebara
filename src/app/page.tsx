@@ -197,7 +197,8 @@ export default function Home() {
             <span className="text-[max(12px,1.82cqw)] font-medium">Currently at</span>
           </div>
 
-          <p className="poster-title mt-[2.05cqw] mb-auto -ml-[1.14cqw] text-[26.8cqw] leading-[0.9] font-semibold tracking-[-0.055em] whitespace-nowrap">
+          <p className="poster-title mt-[2.05cqw] mb-auto -ml-[0.45cqw] flex items-center gap-[1.59cqw] text-[21.6cqw] leading-[0.9] font-semibold tracking-[-0.055em] whitespace-nowrap">
+            <WonderMark className="size-[15.9cqw] shrink-0" />
             Wonder
           </p>
 
