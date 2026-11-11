@@ -1,6 +1,7 @@
 import grain from "../../public/grain.png";
 import { EmailLink } from "./email-link";
 import { PosterPhoto } from "./poster-photo";
+import { PosterStatement } from "./poster-statement";
 import { Sparkle } from "./sparkle";
 import { ThemeSwitcher } from "./theme-switcher";
 
@@ -169,7 +170,7 @@ export default function Home() {
 
       <section
         aria-label="Currently at Wonder"
-        className="poster @container relative mt-24 aspect-[880/1100] w-full max-w-[880px] overflow-clip bg-poster text-page transition-colors duration-500 sm:mt-[180px]"
+        className="poster @container relative mt-24 aspect-[880/1100] w-full max-w-[560px] overflow-clip bg-poster text-page transition-colors duration-500 sm:mt-[180px]"
       >
         <div className="poster-photo absolute inset-x-0 -top-[15%] h-[130%]">
           <PosterPhoto />
@@ -181,23 +182,18 @@ export default function Home() {
         />
 
         <div className="relative flex size-full flex-col p-[4.55cqw]">
-          <div className="flex w-full items-center justify-between">
-            <span className="text-[max(12px,1.93cqw)] font-semibold">Marko Zivanovic</span>
-            <span className="text-[max(12px,1.82cqw)] font-medium">Currently at</span>
-          </div>
-
-          <p className="poster-title mt-[2.05cqw] mb-auto -ml-[0.45cqw] flex items-center gap-[1.59cqw] text-[21.14cqw] leading-[0.9] font-semibold tracking-[-0.055em] whitespace-nowrap">
-            <WonderMark viewBox="215 223 593 578" className="h-[16.25cqw] w-[16.7cqw] shrink-0" />
+          {/* Sized and nudged so the mark's top and left edges and the word's
+              right edge all sit one poster padding from the poster's edge. */}
+          <p className="poster-title -mt-[1.5cqw] mb-auto flex items-center gap-[1.6cqw] text-[21.24cqw] leading-[0.9] font-semibold tracking-[-0.055em] whitespace-nowrap">
+            <WonderMark viewBox="215 223 593 578" className="h-[16.32cqw] w-[16.78cqw] shrink-0" />
             Wonder
           </p>
 
-          <p className="poster-statement mb-[20cqw] w-[34.1cqw] text-[3.86cqw] leading-[1.08] font-semibold tracking-[-0.025em]">
-            Design and code with your agents on one canvas.
-          </p>
+          <PosterStatement className="poster-statement mb-[20cqw] w-[54cqw] text-[3.86cqw] text-balance leading-[1.08] font-semibold tracking-[-0.025em]" />
         </div>
       </section>
 
-      <footer className="mt-7 w-full max-w-[880px] text-[15px] font-medium">
+      <footer className="mt-7 w-full max-w-[560px] text-[15px] font-medium">
         © {new Date().getFullYear()} Marko Zivanovic
       </footer>
     </div>

@@ -40,7 +40,7 @@ function Photo({
       src={photo.src}
       alt={photo.alt}
       fill
-      sizes="(min-width: 912px) 880px, 100vw"
+      sizes="(min-width: 592px) 560px, 100vw"
       placeholder={incoming ? "empty" : "blur"}
       loading="eager"
       onLoad={() => setLoaded(true)}

@@ -1,8 +1,9 @@
+/** Each theme also carries its own line about Wonder for the poster. */
 export const THEMES = [
-  { id: "rose", label: "Rose" },
-  { id: "lemon", label: "Lemon" },
-  { id: "pool", label: "Pool" },
-  { id: "peach", label: "Peach" },
+  { id: "rose", label: "Rose", statement: "Design and code with your agents on one canvas." },
+  { id: "lemon", label: "Lemon", statement: "From first idea to shipped product on one canvas." },
+  { id: "pool", label: "Pool", statement: "Your designs and your code, side by side." },
+  { id: "peach", label: "Peach", statement: "Agents that design, build and ship with you." },
 ] as const;
 
 export type ThemeId = (typeof THEMES)[number]["id"];
