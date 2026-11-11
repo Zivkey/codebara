@@ -1,14 +1,15 @@
 import Image from "next/image";
 import seaPoster from "../../public/sea-poster.png";
+import { EmailLink } from "./email-link";
 
-const EMAIL_HREF = "mailto:marko@wonder.so";
+const EMAIL = "marko@wonder.so";
 
 const links = [
   { name: "Wonder", note: "wonder.design", href: "https://wonder.design" },
   { name: "X", note: "Posts about building with agents", href: "https://x.com/zivkeey" },
   { name: "GitHub", note: "github.com/Zivkey", href: "https://github.com/Zivkey" },
   { name: "LinkedIn", note: "Work history", href: "https://www.linkedin.com/in/marko-zivanovicc/" },
-  { name: "Email", note: "Say hi", href: EMAIL_HREF },
+  { name: "Email", note: "Say hi", href: `mailto:${EMAIL}` },
 ];
 
 function ArrowUpRight({ className }: { className?: string }) {
@@ -54,12 +55,13 @@ export default function Home() {
     <div className="relative flex flex-1 flex-col items-center overflow-clip bg-rose px-4 pb-24 font-sans text-azure antialiased">
       <header className="absolute inset-x-6 top-8 flex items-center justify-between sm:inset-x-10">
         <span className="text-[17px] font-semibold tracking-[-0.01em]">Codebara</span>
-        <a
-          href={EMAIL_HREF}
-          className="text-base font-semibold underline decoration-azure underline-offset-[5px] transition-[text-underline-offset] duration-300 ease-out-expo hover:underline-offset-[9px] focus-visible:underline-offset-[9px]"
+        <EmailLink
+          email={EMAIL}
+          className="group text-base font-semibold underline decoration-azure underline-offset-[5px] transition-[text-underline-offset] duration-300 ease-out-expo hover:underline-offset-[9px] focus-visible:underline-offset-[9px]"
         >
-          Say hi
-        </a>
+          <span className="group-data-copied:hidden">Say hi</span>
+          <span className="hidden group-data-copied:inline">Email copied</span>
+        </EmailLink>
       </header>
 
       <main className="mt-32 flex w-full max-w-[560px] flex-col sm:mt-[168px]">
@@ -88,32 +90,53 @@ export default function Home() {
         <ul className="mt-10 flex w-full flex-col border-b border-cobalt-line">
           {links.map((link) => {
             const external = link.href.startsWith("http");
+            const isEmail = link.href.startsWith("mailto:");
+            const rowClass =
+              "group relative flex w-full items-center justify-between gap-4 py-[13px] outline-none";
+            const row = (
+              <>
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 -top-px h-0.5 bg-azure opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                />
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 -bottom-px h-0.5 bg-azure opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
+                />
+                <span className="relative flex items-center text-[22px] font-semibold tracking-[-0.02em]">
+                  <Sparkle className="absolute left-0 size-[22px] scale-50 -rotate-90 opacity-0 transition duration-300 ease-out-expo group-hover:scale-100 group-hover:rotate-0 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:rotate-0 group-focus-visible:opacity-100" />
+                  <span className="transition-transform duration-300 ease-out-expo group-hover:translate-x-8 group-focus-visible:translate-x-8">
+                    {link.name}
+                  </span>
+                </span>
+                <span className="flex items-center gap-2.5 text-right text-base font-medium">
+                  {isEmail ? (
+                    <>
+                      <span className="group-data-copied:hidden">{link.note}</span>
+                      <span className="hidden group-data-copied:inline">Email copied</span>
+                    </>
+                  ) : (
+                    link.note
+                  )}
+                  <ArrowUpRight className="size-5 shrink-0 transition-transform duration-300 ease-out-expo group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-focus-visible:translate-x-[3px] group-focus-visible:-translate-y-[3px]" />
+                </span>
+              </>
+            );
             return (
               <li key={link.name} className="border-t border-cobalt-line">
-                <a
-                  href={link.href}
-                  {...(external && { target: "_blank", rel: "noopener noreferrer" })}
-                  className="group relative flex w-full items-center justify-between gap-4 py-[13px] outline-none"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-x-0 -top-px h-0.5 bg-azure opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
-                  />
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-x-0 -bottom-px h-0.5 bg-azure opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
-                  />
-                  <span className="relative flex items-center text-[22px] font-semibold tracking-[-0.02em]">
-                    <Sparkle className="absolute left-0 size-[22px] scale-50 -rotate-90 opacity-0 transition duration-300 ease-out-expo group-hover:scale-100 group-hover:rotate-0 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:rotate-0 group-focus-visible:opacity-100" />
-                    <span className="transition-transform duration-300 ease-out-expo group-hover:translate-x-8 group-focus-visible:translate-x-8">
-                      {link.name}
-                    </span>
-                  </span>
-                  <span className="flex items-center gap-2.5 text-right text-base font-medium">
-                    {link.note}
-                    <ArrowUpRight className="size-5 shrink-0 transition-transform duration-300 ease-out-expo group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-focus-visible:translate-x-[3px] group-focus-visible:-translate-y-[3px]" />
-                  </span>
-                </a>
+                {isEmail ? (
+                  <EmailLink email={EMAIL} className={rowClass}>
+                    {row}
+                  </EmailLink>
+                ) : (
+                  <a
+                    href={link.href}
+                    {...(external && { target: "_blank", rel: "noopener noreferrer" })}
+                    className={rowClass}
+                  >
+                    {row}
+                  </a>
+                )}
               </li>
             );
           })}
