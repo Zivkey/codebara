@@ -82,8 +82,8 @@ export default function Home() {
             agents work together.
           </p>
           <p>
-            Codebara is just the name on my invoices. If you want to talk, the links below are
-            the fastest way.
+            Always happy to talk about design, code or agents. The links below are the fastest
+            way to reach me.
           </p>
         </div>
 
