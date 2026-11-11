@@ -82,19 +82,6 @@ export default function Home() {
       {/* Floats in the corner, clear of the centered content, while the page scrolls. */}
       <ThemeSwitcher className="fixed right-5 bottom-[calc(1.25rem+env(safe-area-inset-bottom))] z-50 sm:right-8 sm:bottom-8" />
 
-      <header className="absolute inset-x-6 top-8 flex items-center justify-between sm:inset-x-10">
-        <span className="text-[17px] font-semibold tracking-[-0.01em]">Codebara</span>
-        <EmailLink
-          email={EMAIL}
-          className="group text-base font-semibold"
-        >
-          <CopiedSwap
-            label="Say hi"
-            className="underline decoration-ink underline-offset-[5px] group-hover:underline-offset-[9px] group-focus-visible:underline-offset-[9px]"
-          />
-        </EmailLink>
-      </header>
-
       <main className="mt-24 flex w-full max-w-[560px] flex-col sm:mt-[120px]">
         <h1 className="text-[44px] leading-none font-semibold tracking-[-0.045em] whitespace-nowrap sm:text-[68px]">
           Marko Zivanovic
