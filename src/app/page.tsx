@@ -94,7 +94,7 @@ export default function Home() {
         </EmailLink>
       </header>
 
-      <main className="mt-32 flex w-full max-w-[560px] flex-col sm:mt-[168px]">
+      <main className="mt-24 flex w-full max-w-[560px] flex-col sm:mt-[120px]">
         <h1 className="text-[44px] leading-none font-semibold tracking-[-0.045em] whitespace-nowrap sm:text-[68px]">
           Marko Zivanovic
         </h1>
