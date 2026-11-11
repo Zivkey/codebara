@@ -21,6 +21,7 @@ const title = "Codebara — Marko Živanović";
 const description = "Portfolio of Marko Živanović — developer building thoughtful software.";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.codebara.me"),
   title,
   description,
   openGraph: { title, description, type: "website", siteName: "Codebara" },
