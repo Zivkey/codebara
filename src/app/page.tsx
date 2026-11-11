@@ -65,9 +65,17 @@ function Sparkle({ className }: { className?: string }) {
   );
 }
 
-function WonderMark({ className }: { className?: string }) {
+function WonderMark({
+  className,
+  // The default box leaves a little air around the mark; pass a tighter one
+  // to size the mark by its own edges.
+  viewBox = "192 192 640 640",
+}: {
+  className?: string;
+  viewBox?: string;
+}) {
   return (
-    <svg viewBox="192 192 640 640" fill="none" aria-hidden="true" className={className}>
+    <svg viewBox={viewBox} fill="none" aria-hidden="true" className={className}>
       <path
         fill="currentColor"
         fillRule="evenodd"
@@ -197,8 +205,8 @@ export default function Home() {
             <span className="text-[max(12px,1.82cqw)] font-medium">Currently at</span>
           </div>
 
-          <p className="poster-title mt-[2.05cqw] mb-auto -ml-[0.45cqw] flex items-center gap-[1.59cqw] text-[21.6cqw] leading-[0.9] font-semibold tracking-[-0.055em] whitespace-nowrap">
-            <WonderMark className="size-[15.9cqw] shrink-0" />
+          <p className="poster-title mt-[2.05cqw] mb-auto -ml-[0.45cqw] flex items-center gap-[1.59cqw] text-[21.14cqw] leading-[0.9] font-semibold tracking-[-0.055em] whitespace-nowrap">
+            <WonderMark viewBox="215 223 593 578" className="h-[16.25cqw] w-[16.7cqw] shrink-0" />
             Wonder
           </p>
 
