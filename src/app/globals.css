@@ -10,6 +10,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-handwriting: var(--font-caveat);
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --color-rose: #f8c8e0;
+  --color-azure: #4b90f8;
+  --color-cobalt-deep: #1a3fb0;
+  --color-cobalt-line: #2f6bf252;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,60 +32,80 @@ body {
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-/* ---- Subtle drifting gradient background ---- */
-.bg-aurora {
-  position: absolute;
-  inset: -25%;
-  border-radius: 9999px;
-  filter: blur(70px);
-  will-change: transform;
-}
+/* ---- Sea poster: scroll reveal + photo parallax ---- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .poster {
+      view-timeline-name: --poster;
+      animation: poster-reveal linear both;
+      animation-timeline: --poster;
+      animation-range: entry 0% entry 70%;
+    }
 
-.bg-aurora--1 {
-  background: radial-gradient(
-    45% 45% at 50% 50%,
-    rgba(150, 150, 165, 0.12),
-    transparent 70%
-  );
-  animation: drift-1 22s ease-in-out infinite;
-}
+    .poster-photo {
+      animation: poster-parallax linear both;
+      animation-timeline: --poster;
+      animation-range: cover 0% cover 100%;
+    }
 
-.bg-aurora--2 {
-  background: radial-gradient(
-    40% 40% at 50% 50%,
-    rgba(110, 120, 140, 0.1),
-    transparent 70%
-  );
-  animation: drift-2 28s ease-in-out infinite;
-}
+    .poster-title {
+      animation: poster-rise linear both;
+      animation-timeline: --poster;
+      animation-range: entry 15% entry 60%;
+    }
 
-@keyframes drift-1 {
-  0% {
-    transform: translate(-12%, -8%) scale(1.05);
-  }
-  50% {
-    transform: translate(10%, 6%) scale(1.2);
-  }
-  100% {
-    transform: translate(-12%, -8%) scale(1.05);
+    .poster-statement {
+      animation: poster-rise linear both;
+      animation-timeline: --poster;
+      animation-range: entry 45% entry 95%;
+    }
+
+    .poster-note {
+      animation: poster-note-in linear both;
+      animation-timeline: --poster;
+      animation-range: entry 55% cover 50%;
+    }
   }
 }
 
-@keyframes drift-2 {
-  0% {
-    transform: translate(14%, 10%) scale(1.15);
+@keyframes poster-reveal {
+  from {
+    clip-path: inset(10% 9% 0 9% round 28px);
+    transform: translateY(96px);
   }
-  50% {
-    transform: translate(-8%, -10%) scale(1);
-  }
-  100% {
-    transform: translate(14%, 10%) scale(1.15);
+  to {
+    clip-path: inset(0 0 0 0 round 0);
+    transform: none;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .bg-aurora--1,
-  .bg-aurora--2 {
-    animation: none;
+@keyframes poster-parallax {
+  from {
+    transform: translateY(-10%) scale(1.12);
+  }
+  to {
+    transform: translateY(10%) scale(1);
+  }
+}
+
+@keyframes poster-rise {
+  from {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes poster-note-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
