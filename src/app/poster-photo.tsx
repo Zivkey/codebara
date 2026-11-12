@@ -15,9 +15,15 @@ const photos: Record<ThemeId, { src: StaticImageData; alt: string }> = {
     src: sea,
     alt: "The sea seen from a rocky coast, with pink bougainvillea in the foreground",
   },
-  lemon: { src: lemon, alt: "A lemon tree branch against a deep blue sky" },
+  lemon: {
+    src: lemon,
+    alt: "A lemon tree branch against a deep blue sky, with a small plane and its contrail",
+  },
   pool: { src: pool, alt: "An orange tree branch over turquoise pool water" },
-  peach: { src: peach, alt: "A peach tree branch against a deep blue sky" },
+  peach: {
+    src: peach,
+    alt: "A peach tree branch against a deep blue sky with a few small clouds",
+  },
 };
 
 function Photo({
