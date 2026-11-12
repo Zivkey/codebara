@@ -13,14 +13,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "Codebara — Marko Živanović";
-const description = "Portfolio of Marko Živanović — developer building thoughtful software.";
+const title = "Marko Zivanovic";
+const description = "Engineer at Wonder.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.codebara.me"),
+  metadataBase: new URL("https://www.zivke.me"),
   title,
   description,
-  openGraph: { title, description, type: "website", siteName: "Codebara" },
+  openGraph: { title, description, type: "website", siteName: title },
   twitter: { card: "summary_large_image", title, description },
 };
 
