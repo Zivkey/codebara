@@ -29,24 +29,33 @@ export function PosterStatement({ className = "" }: { className?: string }) {
         <span
           key={`leaving-${leaving}`}
           aria-hidden="true"
-          className="poster-statement-out absolute inset-0"
+          className="poster-statement-out absolute inset-0 whitespace-pre-line"
           onAnimationEnd={() => setLayers((current) => current.slice(-1))}
         >
           {statements[leaving]}
         </span>
       )}
       <span key={theme} className="block">
-        {statements[theme].split(" ").map((word, index) => (
-          <Fragment key={index}>
-            {index > 0 && " "}
-            <span
-              className="poster-word inline-block"
-              style={{ animationDelay: `${120 + index * 45}ms` }}
-            >
-              {word}
-            </span>
-          </Fragment>
-        ))}
+        {statements[theme].split("\n").map((line, lineIndex, lines) => {
+          // Words count on across lines so the stagger runs through both.
+          const before = lines.slice(0, lineIndex).join(" ").split(" ").filter(Boolean).length;
+          return (
+            <Fragment key={lineIndex}>
+              {lineIndex > 0 && <br />}
+              {line.split(" ").map((word, index) => (
+                <Fragment key={index}>
+                  {index > 0 && " "}
+                  <span
+                    className="poster-word inline-block"
+                    style={{ animationDelay: `${120 + (before + index) * 45}ms` }}
+                  >
+                    {word}
+                  </span>
+                </Fragment>
+              ))}
+            </Fragment>
+          );
+        })}
       </span>
     </p>
   );

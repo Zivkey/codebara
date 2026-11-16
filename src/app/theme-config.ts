@@ -1,9 +1,12 @@
-/** Each theme also carries its own line about Wonder for the poster. */
+/**
+ * Each theme also carries its own line about Wonder for the poster, set as two
+ * lines (split at "\n") so every poster breaks with the longer line on top.
+ */
 export const THEMES = [
-  { id: "rose", label: "Rose", statement: "Design and code with your agents on one canvas." },
-  { id: "lemon", label: "Lemon", statement: "From first idea to shipped product on one canvas." },
-  { id: "pool", label: "Pool", statement: "Your designs and your code, side by side." },
-  { id: "peach", label: "Peach", statement: "Agents that design, build and ship with you." },
+  { id: "rose", label: "Rose", statement: "Design and code with your\nagents on one canvas." },
+  { id: "lemon", label: "Lemon", statement: "From first idea to shipped\nproduct on one canvas." },
+  { id: "pool", label: "Pool", statement: "Your designs and your\ncode, side by side." },
+  { id: "peach", label: "Peach", statement: "Build alongside agents\nthat design and code." },
 ] as const;
 
 export type ThemeId = (typeof THEMES)[number]["id"];

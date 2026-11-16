@@ -45,6 +45,15 @@
   --color-poster: var(--poster);
 }
 
+/*
+ * One design pixel of the desktop layout. The page was drawn for a 900px-tall
+ * screen; from lg up it scales with the viewport height so it always fits one
+ * screen, within limits that keep the text readable.
+ */
+:root {
+  --u: clamp(0.85px, calc(100svh / 900), 1.25px);
+}
+
 body {
   background: var(--page);
   color: var(--ink);
@@ -54,7 +63,8 @@ body {
 
 /* ---- Sea poster: scroll reveal + photo parallax ---- */
 @supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
+  /* The one-screen desktop layout doesn't scroll, so it has no scroll effects. */
+  @media (prefers-reduced-motion: no-preference) and (max-width: 63.999rem) {
     .poster {
       view-timeline-name: --poster;
       animation: poster-reveal linear both;

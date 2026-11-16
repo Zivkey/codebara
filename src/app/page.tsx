@@ -78,22 +78,24 @@ function WonderMark({
 
 export default function Home() {
   return (
-    <div className="relative flex flex-1 flex-col items-center overflow-clip bg-page px-4 pb-24 font-sans text-ink antialiased transition-colors duration-300">
+    // From lg up the whole page fits one screen: the same stack, sized in --u
+    // units (globals.css) that scale with the viewport height.
+    <div className="relative flex flex-1 flex-col items-center overflow-clip bg-page px-4 pb-24 font-sans text-ink antialiased transition-colors duration-300 lg:min-h-svh lg:justify-center lg:gap-[calc(var(--u)*24)] lg:py-[calc(var(--u)*40)]">
       {/* Floats in the corner, clear of the centered content, while the page scrolls. */}
       <ThemeSwitcher className="fixed right-5 bottom-[calc(1.25rem+env(safe-area-inset-bottom))] z-50 sm:right-8 sm:bottom-8" />
 
-      <main className="mt-24 flex w-full max-w-[560px] flex-col sm:mt-[120px]">
-        <h1 className="text-[44px] leading-none font-semibold tracking-[-0.045em] whitespace-nowrap sm:text-[68px]">
+      <main className="mt-24 flex w-full max-w-[560px] flex-col sm:mt-[120px] lg:mt-0 lg:w-[calc(var(--u)*420)] lg:max-w-none">
+        <h1 className="text-[44px] leading-none font-semibold tracking-[-0.045em] whitespace-nowrap sm:text-[68px] lg:text-[length:calc(var(--u)*36)]">
           Marko Zivanovic
         </h1>
 
-        <p className="mt-3.5 flex items-center gap-2 text-[22px] font-semibold tracking-[-0.01em]">
+        <p className="mt-3.5 flex items-center gap-2 text-[22px] font-semibold tracking-[-0.01em] lg:mt-[calc(var(--u)*8)] lg:gap-[calc(var(--u)*6)] lg:text-[length:calc(var(--u)*16)]">
           Building at
-          <WonderMark className="size-[26px]" />
+          <WonderMark className="size-[26px] lg:size-[calc(var(--u)*19)]" />
           Wonder
         </p>
 
-        <div className="mt-[34px] flex flex-col gap-3.5 text-[19px] leading-[1.55] font-medium">
+        <div className="mt-[34px] flex flex-col gap-3.5 text-[19px] leading-[1.55] font-medium lg:mt-[calc(var(--u)*18)] lg:gap-[calc(var(--u)*8)] lg:text-[length:calc(var(--u)*14)] lg:leading-[1.5]">
           <p>I&apos;m a software engineer.</p>
           <p>
             These days I work on Wonder, a canvas for designing and building software with AI
@@ -102,12 +104,12 @@ export default function Home() {
           <p>The links are below. Say hi.</p>
         </div>
 
-        <ul className="mt-10 flex w-full flex-col border-b border-line">
+        <ul className="mt-10 flex w-full flex-col border-b border-line lg:mt-[calc(var(--u)*20)]">
           {links.map((link) => {
             const external = link.href.startsWith("http");
             const isEmail = link.href.startsWith("mailto:");
             const rowClass =
-              "group relative flex w-full items-center justify-between gap-4 py-[13px] outline-none";
+              "group relative flex w-full items-center justify-between gap-4 py-[13px] outline-none lg:py-[calc(var(--u)*5)]";
             const row = (
               <>
                 <span
@@ -118,19 +120,19 @@ export default function Home() {
                   aria-hidden="true"
                   className="absolute inset-x-0 -bottom-px h-0.5 bg-ink opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
                 />
-                <span className="relative flex items-center text-[22px] font-semibold tracking-[-0.02em]">
-                  <Sparkle className="absolute left-0 size-[22px] scale-50 -rotate-90 opacity-0 transition duration-300 ease-out-expo group-hover:scale-100 group-hover:rotate-0 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:rotate-0 group-focus-visible:opacity-100" />
-                  <span className="transition-transform duration-300 ease-out-expo group-hover:translate-x-8 group-focus-visible:translate-x-8">
+                <span className="relative flex items-center text-[22px] font-semibold tracking-[-0.02em] lg:text-[length:calc(var(--u)*16)]">
+                  <Sparkle className="absolute left-0 size-[22px] lg:size-[calc(var(--u)*16)] scale-50 -rotate-90 opacity-0 transition duration-300 ease-out-expo group-hover:scale-100 group-hover:rotate-0 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:rotate-0 group-focus-visible:opacity-100" />
+                  <span className="transition-transform duration-300 ease-out-expo group-hover:translate-x-8 group-focus-visible:translate-x-8 lg:group-hover:translate-x-[calc(var(--u)*22)] lg:group-focus-visible:translate-x-[calc(var(--u)*22)]">
                     {link.name}
                   </span>
                 </span>
-                <span className="flex items-center gap-2.5 text-right text-base font-medium">
+                <span className="flex items-center gap-2.5 text-right text-base font-medium lg:gap-[calc(var(--u)*6)] lg:text-[length:calc(var(--u)*12)]">
                   {isEmail ? (
                     <CopiedSwap label={link.note} />
                   ) : (
                     link.note
                   )}
-                  <ArrowUpRight className="size-5 shrink-0 transition-transform duration-300 ease-out-expo group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-focus-visible:translate-x-[3px] group-focus-visible:-translate-y-[3px]" />
+                  <ArrowUpRight className="size-5 shrink-0 lg:size-[calc(var(--u)*14)] transition-transform duration-300 ease-out-expo group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-focus-visible:translate-x-[3px] group-focus-visible:-translate-y-[3px]" />
                 </span>
               </>
             );
@@ -157,9 +159,11 @@ export default function Home() {
 
       <section
         aria-label="Currently at Wonder"
-        className="poster @container relative mt-24 aspect-[880/1100] w-full max-w-[560px] overflow-clip bg-poster text-page transition-colors duration-500 sm:mt-[180px]"
+        className="poster @container relative mt-24 aspect-[880/1100] w-full max-w-[560px] overflow-clip bg-poster text-page transition-colors duration-500 sm:mt-[180px] lg:mt-0 lg:aspect-[21/20] lg:w-[calc(var(--u)*420)] lg:max-w-none"
       >
-        <div className="poster-photo absolute inset-x-0 -top-[15%] h-[130%]">
+        {/* The extra height is room for the scroll parallax, which the
+            one-screen desktop layout doesn't use. */}
+        <div className="poster-photo absolute inset-x-0 -top-[15%] h-[130%] lg:top-0 lg:h-full">
           <PosterPhoto />
         </div>
         <div
@@ -179,10 +183,6 @@ export default function Home() {
           <PosterStatement className="poster-statement mb-[20cqw] w-[54cqw] text-[3.86cqw] text-balance leading-[1.08] font-semibold tracking-[-0.025em]" />
         </div>
       </section>
-
-      <footer className="mt-7 w-full max-w-[560px] text-[15px] font-medium">
-        © {new Date().getFullYear()} Marko Zivanovic
-      </footer>
     </div>
   );
 }
