@@ -13,11 +13,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const title = "Marko Zivanovic";
+const title = "John Doe";
 const description = "Engineer at Wonder.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.zivke.me"),
+  metadataBase: new URL("https://johndoe.example.com"),
   title,
   description,
   openGraph: { title, description, type: "website", siteName: title },

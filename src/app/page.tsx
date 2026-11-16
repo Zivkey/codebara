@@ -5,13 +5,13 @@ import { PosterStatement } from "./poster-statement";
 import { Sparkle } from "./sparkle";
 import { ThemeSwitcher } from "./theme-switcher";
 
-const EMAIL = "marko@wonder.so";
+const EMAIL = "john@example.com";
 
 const links = [
   { name: "Wonder", note: "wonder.design", href: "https://wonder.design" },
-  { name: "X", note: "Posts about building with agents", href: "https://x.com/zivkeey" },
-  { name: "GitHub", note: "github.com/Zivkey", href: "https://github.com/Zivkey" },
-  { name: "LinkedIn", note: "Work history", href: "https://www.linkedin.com/in/marko-zivanovicc/" },
+  { name: "X", note: "Posts about building with agents", href: "https://x.com/johndoe" },
+  { name: "GitHub", note: "github.com/johndoe", href: "https://github.com/johndoe" },
+  { name: "LinkedIn", note: "Work history", href: "https://www.linkedin.com/in/johndoe/" },
   { name: "Email", note: "Say hi", href: `mailto:${EMAIL}` },
 ];
 
@@ -86,7 +86,7 @@ export default function Home() {
 
       <main className="mt-24 flex w-full max-w-[560px] flex-col sm:mt-[120px] lg:mt-0 lg:w-[calc(var(--u)*420)] lg:max-w-none">
         <h1 className="text-[44px] leading-none font-semibold tracking-[-0.045em] whitespace-nowrap sm:text-[68px] lg:text-[length:calc(var(--u)*36)]">
-          Marko Zivanovic
+          John Doe
         </h1>
 
         <p className="mt-3.5 flex items-center gap-2 text-[22px] font-semibold tracking-[-0.01em] lg:mt-[calc(var(--u)*8)] lg:gap-[calc(var(--u)*6)] lg:text-[length:calc(var(--u)*16)]">
